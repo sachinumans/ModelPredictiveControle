@@ -1,3 +1,4 @@
+clear all;
 % Inertias
 I_yy  = 4370*10^7
 m     = 1993*10^3
@@ -19,6 +20,6 @@ Z_B   = 0.1815
 Z_dels= -6850*10^3
 M_dels= -1992*10^5
 % Velocity
-u = 8
+u0 = 8
 
 save param
