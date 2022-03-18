@@ -19,13 +19,12 @@ C = [0, 0, 1, 0; 0, 0, 0, 1];
 D = zeros(2);
 
 CTsys = ss(A, B, C, D);
-L = series(eye(2), CTsys);
-nq = eye(2) + L;
-detnq = nq(1,1)*nq(2,2) - nq(2,1)*nq(1,2);
-nyquistplot(-1*detnq)
+    CTsys.u = {'del_s', 'del_b'};
+    CTsys.y = {'theta', 'z'};
+    CTsys.StateName = {'z_dot', 'theta_dot', 'theta', 'z'};
 
 DTsys = c2d(CTsys, 1);
 
 sys = DTsys;
 
-save System.mat sys
+save System.mat sys CTsys
