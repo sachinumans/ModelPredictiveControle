@@ -39,6 +39,18 @@ Xf_cstr_b=[ 0.2;0.2;...
             0.1;0.1;...
             0.02;0.02;...
             0.005;0.005];
+        
+%% Create monstermatrices
 
-save cstrMat.mat U_cstr U_cstr_b X_cstr X_cstr_b Xf_cstr Xf_cstr_b
+load System.mat
+
+
+cstr.U_cstr = repmat(U_cstr, 1, dim.N);
+cstr.U_cstr_b = repmat(U_cstr_b, 1, dim.N);
+cstr.X_cstr = repmat(X_cstr, 1, dim.N);
+cstr.X_cstr_b = repmat(X_cstr_b, 1, dim.N);
+cstr.Xf_cstr = Xf_cstr;
+cstr.Xf_cstr_b = Xf_cstr_b;
+
+save cstrMat.mat cstr
 
