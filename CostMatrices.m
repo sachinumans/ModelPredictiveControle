@@ -1,3 +1,4 @@
+clear
 load System.mat
 
 N = diag([2.5, 20, 4, 0.1]);
@@ -10,5 +11,9 @@ R_scld = Nu.'*R*Nu;
 
 [P, K, L] = idare(sys.A, sys.B, Q_scld, R_scld);
 
-save CostMat.mat Q_scld R_scld P
+%%
+[T,S]=predmodgen(sys,dim);                 
+
+
+save CostMat.mat Q_scld R_scld P T S 
 

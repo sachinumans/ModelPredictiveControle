@@ -27,5 +27,12 @@ DTsys = c2d(CTsys, 1);
 
 sys = DTsys;
 
-save System.mat sys CTsys
+%% Dimensions and horizon
+dim.N=5;
+
+dim.nx=size(sys.A,1);
+dim.ny=size(sys.C,1);
+dim.nu=size(sys.B,2);
+
+save System.mat sys CTsys dim
 
