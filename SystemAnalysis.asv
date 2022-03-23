@@ -24,9 +24,6 @@ rank(K) == 4
 W = obsv(CTsys);
 rank(W) == 4
 
-%% Eigenspace
-[V, D] = eig(CTsys.A)
-
 %% Input magnitude analysis
 SIMO = ss(sys.A, sys.B(:,1), sys.C, sys.D(:,1), 1);
 K_simo = rank(ctrb(SIMO))

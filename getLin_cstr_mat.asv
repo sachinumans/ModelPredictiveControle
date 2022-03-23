@@ -53,8 +53,8 @@ cstr.U_cstr1 = U_cstr;
 cstr.U_cstr_b1 = U_cstr_b;
 cstr.X_cstr1 = X_cstr;
 cstr.X_cstr_b1 = X_cstr_b;
-cstr.Xf_cstr = X_cstr;%Xf_cstr;
-cstr.Xf_cstr_b = 100*X_cstr_b;%20*Xf_cstr_b;
+cstr.Xf_cstr = Xf_cstr;
+cstr.Xf_cstr_b = Xf_cstr_b;
 
 
 
