@@ -1,4 +1,4 @@
-clear;
+clear; close all; clc;
 %%
 updateAll("Y");
 %%
@@ -17,7 +17,7 @@ end
 
 
 %%
-n = 50; x = [x0, zeros(4,n)]; u = zeros(2, n); % init
+n = 100; x = [x0, zeros(4,n)]; u = zeros(2, n); % init
 if n < dim.N; error("Simulation time too short"); end
 u(:,1) = MPCgetInput(T, S, cstr, R_scld, Q_scld, P, dim, x0);
 for t = 2:n
