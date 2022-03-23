@@ -27,3 +27,14 @@ hold off
 % z_dot = +- 0.1
 % theta = +- 0.02 rad
 % theta_dot = +- 0.005 rad
+
+figure('Name', "State & Terminal set")
+hold on
+grid on
+patch([ang, 0, -ang, -ang, 0, ang], [0.025, 0.05, 0.025, -0.025, -0.05, -0.025], 'red', 'FaceAlpha', 0.2)
+patch([-0.02,0.02,0.02,-0.02], [-0.005,-0.005,0.005,0.005], 'blue', 'FaceAlpha', 0.2)
+xlabel("\theta")
+ylabel("$\dot{\theta}$", 'Interpreter', 'latex')
+% text(0,0,"$\mathcal{X}$", 'Interpreter', 'latex')
+% hold off
+

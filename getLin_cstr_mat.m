@@ -18,7 +18,7 @@ X_cstr = [  0       0           1       0;...
             0       0           0       -1];
 
 X_cstr_b = [0.25;0.25;...
-            0.5;0.5;-0.5;-0.5;...
+            0.5;0.5;0.5;0.5;...
             0.4;0.4;...
             50;50];
         
@@ -45,12 +45,18 @@ Xf_cstr_b=[ 0.2;0.2;...
 load System.mat
 
 
-cstr.U_cstr = repmat(U_cstr, 1, dim.N);
-cstr.U_cstr_b = repmat(U_cstr_b, 1, dim.N);
-cstr.X_cstr = repmat(X_cstr, 1, dim.N);
-cstr.X_cstr_b = repmat(X_cstr_b, 1, dim.N);
+cstr.U_cstr = kron(eye(dim.N), U_cstr);
+cstr.U_cstr_b = repmat(U_cstr_b, dim.N, 1);
+cstr.X_cstr = kron(eye(dim.N+1), X_cstr);
+cstr.X_cstr_b = repmat(X_cstr_b, dim.N+1, 1);
+cstr.U_cstr1 = U_cstr;
+cstr.U_cstr_b1 = U_cstr_b;
+cstr.X_cstr1 = X_cstr;
+cstr.X_cstr_b1 = X_cstr_b;
 cstr.Xf_cstr = Xf_cstr;
 cstr.Xf_cstr_b = Xf_cstr_b;
+
+
 
 save cstrMat.mat cstr
 

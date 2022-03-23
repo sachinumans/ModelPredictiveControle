@@ -28,7 +28,7 @@ DTsys = c2d(CTsys, 1);
 sys = DTsys;
 
 %% Dimensions and horizon
-dim.N=5;
+dim.N=500;
 
 dim.nx=size(sys.A,1);
 dim.ny=size(sys.C,1);

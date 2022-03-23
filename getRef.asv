@@ -1,0 +1,17 @@
+function [xRef,uRef] = getRef(yRef, sys, cstr)
+% Get the best estimates for the steady state x and u such that yRef is
+% outputted
+
+u = sdpvar(2,1);
+x = sdpvar(4,1);
+
+N = [2.5, 20, 4, 0.1]; % State normalising vector
+Nu = [4, 4]; % Input normalising vector
+
+Objective = N*x + Nu*u;
+Constraints = [ (eye(size(sys.A))-A)*x - sys.B*u == 0 ,...
+                sys.C*u == yRef ,...
+                cstr.X_cstr * x <= cstr.X_cstr_b ,...
+
+end
+

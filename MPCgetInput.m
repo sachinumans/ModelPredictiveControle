@@ -10,11 +10,11 @@ states = (T*x0 + S*uN);
 Objective = 0.5*uN'*H*uN + h'*uN;
 Constraints = [cstr.X_cstr*states           <= cstr.X_cstr_b,...
                cstr.U_cstr*uN               <= cstr.U_cstr_b,...
-               cstr.Xf_cstr*states(end-1)   <= cstr.Xf_cstr_b];
+               cstr.Xf_cstr*states(end-2*dim.nx:end-dim.nx-1)   <= cstr.Xf_cstr_b];
 
-optimize(Objective, Constraints)
+optimize(Constraints, Objective)
 
-u = value(uN(1));
+u = value(uN(1:2));
 
 end
 
