@@ -6,7 +6,7 @@ load System.mat
 load cstrMat.mat
 load CostMat.mat
 
-x0 = [0.1;0;0;0.04];
+x0 = [0.1;0;0;0.4];
 
 [T,S] = predmodgen(sys,dim,x0);
 
@@ -17,7 +17,7 @@ end
 
 
 %%
-n = 100; x = [x0, zeros(4,n)]; u = zeros(2, n); % init
+n = 20; x = [x0, zeros(4,n-1)]; u = zeros(2, n); % init
 if n < dim.N; error("Simulation time too short"); end
 u(:,1) = MPCgetInput(T, S, cstr, R_scld, Q_scld, P, dim, x0);
 for t = 2:n
@@ -27,8 +27,8 @@ end
 
 %%
 figure('Name', "State evolution")
-plot(x')
+plot(0:sys.Ts:sys.Ts*(n-1), x')
 legend("$\dot{z}$", "$\dot{\theta}$", "$\theta$", "z", 'Interpreter', 'latex')
 figure('Name', "Inputs")
-plot(u')
+plot(0:sys.Ts:sys.Ts*(n-1), u')
 legend("$\delta_s$", "$\delta_b$", 'Interpreter', 'latex')

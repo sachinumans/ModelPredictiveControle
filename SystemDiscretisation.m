@@ -23,12 +23,12 @@ CTsys = ss(A, B, C, D);
     CTsys.y = {'theta', 'z'};
     CTsys.StateName = {'z_dot', 'theta_dot', 'theta', 'z'};
 
-DTsys = c2d(CTsys, 0.1);
+DTsys = c2d(CTsys, 60);
 
 sys = DTsys;
 
 %% Dimensions and horizon
-dim.N=100;
+dim.N=20;
 
 dim.nx=size(sys.A,1);
 dim.ny=size(sys.C,1);
