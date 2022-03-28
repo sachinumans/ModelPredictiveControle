@@ -6,7 +6,7 @@ u = sdpvar(dim.nu,1);
 x = sdpvar(dim.nx,1);
 
 N = [2.5, 20, 4, 0.1]; % State normalising vector
-Nu = 4; % Input normalising vector
+Nu = [4, 4]; % Input normalising vector
 
 Objective = norm(N*x + Nu*u, 1);
 Constraints = [ (eye(size(sys.A))-sys.A)*x - sys.B*u == 0 ,...

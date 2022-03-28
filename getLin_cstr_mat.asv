@@ -9,12 +9,12 @@ zmax = floor(2*zmax)/2; % Floor to nearest half for ease of life
 
 %% Determine set for which there is an input to achieve steady state
 xmax = abs((eye(4)-sys.A)\sys.B *um);
-cstr.ymax = sys.C*xmax;
+
 
 %% Create LMI matrices
 % u = [del_s; del_b]
-U_cstr = [eye(dim.nu); -eye(dim.nu)];
-U_cstr_b = um*ones(2*dim.nu,1);
+U_cstr = [eye(2); -eye(2)];
+U_cstr_b = um*ones(4,1);
 
 % x = [     z_dot;  theta_dot;  theta;  z]
 X_cstr = [  0       0           1       0;...

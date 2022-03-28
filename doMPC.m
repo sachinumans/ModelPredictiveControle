@@ -10,12 +10,13 @@ x0 = [0;0;0.2;0.2];
 
 [T,S] = predmodgen(sys,dim,x0);
 
-if any(cstr.X_cstr1*x0 >= cstr.X_cstr_b1)
-    error("Initial state is outside of state set")
-end
+if any(cstr.X_cstr1*x0 >= cstr.X_cstr_b1); error("Initial state is outside of state set"); end
 
-yRef = [0; 0.1];
-[xRef,uRef] = getRef(yRef, sys, cstr)
+yRef = [-0.05; 0.05];
+
+if any(yRef >= cstr.ymax); error("Reference won't yield a reference state for which a steadying input existst"); end
+
+[xRef,uRef] = getRef(yRef, sys, cstr, dim)
 uRefN = repmat(uRef, dim.N, 1);
 
 %%
