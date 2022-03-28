@@ -23,7 +23,7 @@ CTsys = ss(A, B, C, D);
     CTsys.y = {'theta', 'z'};
     CTsys.StateName = {'z_dot', 'theta_dot', 'theta', 'z'};
 
-DTsys = c2d(CTsys, 60);
+DTsys = c2d(CTsys, 30);
 
 sys = DTsys;
 
