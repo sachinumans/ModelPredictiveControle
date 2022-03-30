@@ -15,12 +15,12 @@ B_Z = [Z_dels*u0^2, Z_delb*u0^2;...
    
 A = M\A_Z;
 B = M\B_Z;
-C = [0, 0, 1, 0; 0, 0, 0, 1];
-D = zeros(2);
+C = [0, 0, 0, 1];
+D = zeros(1, 2);
 
 CTsys = ss(A, B, C, D);
     CTsys.u = {'del_s', 'del_b'};
-    CTsys.y = {'theta', 'z'};
+    CTsys.y = {'z'};
     CTsys.StateName = {'z_dot', 'theta_dot', 'theta', 'z'};
 
 DTsys = c2d(CTsys, 30);
@@ -28,7 +28,7 @@ DTsys = c2d(CTsys, 30);
 sys = DTsys;
 
 %% Dimensions and horizon
-dim.N=20;
+dim.N=10;
 
 dim.nx=size(sys.A,1);
 dim.ny=size(sys.C,1);
