@@ -3,16 +3,16 @@ updateAll("Y")
 load System.mat
 
 %% Nyquist
-L = series(eye(2), sys);
+L = series(eye(2), DTsys);
 nq = eye(2) + L;
 detnq = nq(1,1)*nq(2,2) - nq(2,1)*nq(1,2);
 nyquistplot(-1*detnq)
 
 %% Pole zero
 figure()
-pzmap(sys)
-display(pole(sys))
-display(tzero(sys))
+pzmap(DTsys)
+display(pole(DTsys))
+display(tzero(DTsys))
 
 %% Controllability
 K = ctrb(CTsys);
@@ -26,14 +26,14 @@ rank(W) == 4;
 [V, D] = eig(CTsys.A);
 
 %% Preemptive pole placement
-SIMO1 = ss(sys.A, sys.B(:,1), sys.C, sys.D(:,1), sys.Ts);
+SIMO1 = ss(DTsys.A, DTsys.B(:,1), DTsys.C, DTsys.D(:,1), DTsys.Ts);
 K_simo1 = rank(ctrb(SIMO1));
 
 P = eig(SIMO1.A);
 K = place(SIMO1.A, SIMO1.B, [0.979, P(2), P(3), 0.98]);
 
 %% Controllabillity of 1 channel state feedback controlled system
-SIMO2 = ss(sys.A - sys.B(:,1)*K, sys.B(:,2), sys.C, sys.D(:,2), sys.Ts);
+SIMO2 = ss(DTsys.A - DTsys.B(:,1)*K, DTsys.B(:,2), DTsys.C, DTsys.D(:,2), DTsys.Ts);
 
 K_simo2 = rank(ctrb(SIMO2));
 

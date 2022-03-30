@@ -23,23 +23,23 @@ CTsys = ss(A, B, C, D);
     CTsys.y = {'theta', 'z'};
     CTsys.StateName = {'z_dot', 'theta_dot', 'theta', 'z'};
     
-Ts = 1;
+Ts = 0.5;
 
 DTsys = c2d(CTsys, Ts);
 
 %% Use one input channel to place poles
 P = eig(DTsys.A);
-SFgain = place(DTsys.A, DTsys.B(:,2), [0.988, P(2), P(3), 0.99]);
+SFgain = place(DTsys.A, DTsys.B(:,2), [0.989, P(2), P(3), 0.99]);
 
 if DTsys.D ~= zeros(size(DTsys.D)); warning("Direct matrix non-zero"); end
 
 sys = ss(DTsys.A - DTsys.B(:,2)*SFgain, DTsys.B(:,1), DTsys.C, DTsys.D(:,1), Ts);
 %% Dimensions and horizon
-dim.N=20;
+dim.N=30;
 
 dim.nx=size(sys.A,1);
 dim.ny=size(sys.C,1);
 dim.nu=size(sys.B,2);
 
-save System.mat sys CTsys dim SFgain
+save System.mat sys CTsys dim SFgain DTsys
 

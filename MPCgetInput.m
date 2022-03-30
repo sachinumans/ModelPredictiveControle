@@ -1,4 +1,4 @@
-function [u] = MPCgetInput(T, S, cstr, R_scld, Q_scld, P, dim, xRef, uRef, x0)
+function [u] = MPCgetInput(T, S, cstr, R_scld, Q_scld, P, dim, xRef, uRef, x0, SFgain)
 % This is the place where the current state is used to perform the constrained MPC optimisation
 
 [H,h]=costgen(T, S, R_scld, Q_scld, P, dim, x0); 
@@ -10,11 +10,13 @@ states = (T*x0 + S*uN);
 Objective = 0.5*(uN-uRef)'*H*(uN-uRef) + h'*(uN-uRef);
 Constraints = [cstr.X_cstr*states                                           <= cstr.X_cstr_b,...
                cstr.U_cstr*uN                                               <= cstr.U_cstr_b,...
-               cstr.Xf_cstr*(states(end-2*dim.nx:end-dim.nx-1)-xRef)        <= cstr.Xf_cstr_b];
+               cstr.Xf_cstr*(states(end-2*dim.nx:end-dim.nx-1)-xRef)        <= cstr.Xf_cstr_b,...
+               kron(eye(dim.N+1), SFgain)*states                            <= 0.25 *ones(dim.N+1,1),...
+               -kron(eye(dim.N+1), SFgain)*states                           <= 0.25 *ones(dim.N+1,1)];
 
 optimize(Constraints, Objective);
 
-u = value(uN(1:2));
+u = value(uN(1:dim.nu));
 
 end
 

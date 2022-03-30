@@ -8,7 +8,7 @@ zmax = abs(um/SFgain(4));
 zmax = floor(2*zmax)/2; % Floor to nearest half for ease of life
 
 %% Determine set for which there is an input to achieve steady state
-xmax = abs((eye(4)-sys.A)\sys.B *um);
+xmax = abs((eye(dim.nx)-sys.A)\sys.B *um);
 cstr.ymax = sys.C*xmax;
 
 %% Create LMI matrices

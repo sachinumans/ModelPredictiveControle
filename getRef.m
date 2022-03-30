@@ -15,13 +15,13 @@ Constraints = [ (eye(size(sys.A))-sys.A)*x - sys.B*u == 0 ,...
                 cstr.U_cstr1 * u <= cstr.U_cstr_b1 ...
                 ];
             
-f = optimize(Constraints, Objective);
+f = optimize(Constraints, Objective)
 
 
 if f.problem > 0
-    warning("No feasible input to obtain steady state with given reference, attempting to find a feasible point nearby."); 
-    [xRef,uRef] = approxRef(yRef, sys, cstr);
-    return
+    error("No feasible input to obtain steady state with given reference")%, attempting to find a feasible point nearby."); 
+%     [xRef,uRef] = approxRef(yRef, sys, cstr);
+%     return
 end
 
 xRef = value(x);
