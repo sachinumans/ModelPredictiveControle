@@ -22,6 +22,6 @@ M_dels= -1992*10^5;
 Z_delb= -6850*10^3;
 M_delb= 1992*10^4;
 % Velocity
-u0 = 8;
+u0 = 5;
 
 save param
