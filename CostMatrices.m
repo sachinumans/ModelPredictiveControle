@@ -15,5 +15,5 @@ R_scld = Nu.'*R*Nu;
 [T,S]=predmodgen(sys,dim);                 
 
 
-save CostMat.mat Q_scld R_scld P T S 
+save CostMat.mat Q_scld R_scld P T S K
 

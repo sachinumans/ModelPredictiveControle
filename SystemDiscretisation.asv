@@ -18,9 +18,8 @@ B_Z = [Z_dels*u0^2, Z_delb*u0^2;...
 A = M\A_Z;
 B = M\B_Z;
 C = [0, 0, 0, 1;
-     0, 0, 1, 0;
-     0, 1, 0, 0];
-D = zeros(size(C,1), 2);
+     0, 0, 1, 0];
+D = zeros(2, 2);
 
 CTsys = ss(A, B, C, D);
     CTsys.u = {'del_s', 'del_b'};
@@ -39,9 +38,12 @@ dim.ny=size(sys.C,1);
 dim.nu=size(sys.B,2);
 
 %% Disturbance Dynamics
-dsys.A = eye(dim.ny);
-dsys.B = zeros(dim.nx, dim.ny);
-dsys.C = eye(dim.ny);
+Ad = eye(dim.ny);
+Bd = zeros(dim.ny, dim.nu);
+Cd = eye(dim.ny);
+Dd = zeros(dim.ny);
+
+dsys = ss(Ad, Bd, Cd, Dd, t_sample);
 
 %% Save as .mat
 

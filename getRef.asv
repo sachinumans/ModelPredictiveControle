@@ -19,15 +19,8 @@ f = optimize(Constraints, Objective);
 
 if f.problem > 0
     warning("No feasible input to obtain steady state with given reference and disturbance estimate, ignoring disturbance estimate."); 
-    Constraints = [ (eye(size(sys.A))-sys.A)*xref - sys.B*uref == 0 ,...
-                    sys.C*xref == yRef ,...
-                    cstr.X_cstr1 * xref <= cstr.X_cstr_b1 ,...
-                    cstr.U_cstr1 * uref <= cstr.U_cstr_b1 ...
-                    ];
-    f = optimize(Constraints, Objective);
-    xRef = value(xref);
-    uRef = value(uref);
-    return
+%     [xRef,uRef] = approxRef(yRef, sys, cstr);
+%     return
 end
 
 xRef = value(xref);

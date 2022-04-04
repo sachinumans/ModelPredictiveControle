@@ -39,9 +39,8 @@ K_simo2 = rank(ctrb(SIMO2));
 
 %% State set based on limited input magnitude
 % x = [ z_dot;  theta_dot;  theta;  z]
-lim = 0.25./K;
+lim = 0.25./K
 
-%% Observabillity of system with constant disturbance
-rank([eye(4)-sys.A, -dsys.B; sys.C, dsys.C])
+
 
 
