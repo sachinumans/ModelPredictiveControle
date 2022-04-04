@@ -1,6 +1,6 @@
 load param
 
-t_sample = 10;
+t_sample = 1;
 
 M = [m-Z_dw, -Z_dq, 0, 0;...
      -M_dw, I_yy - M_dq, 0, 0;...
@@ -32,16 +32,17 @@ DTsys = c2d(CTsys, t_sample);
 sys = DTsys;
 
 %% Dimensions and horizon
-dim.N=5;
+dim.N=30;
 
 dim.nx=size(sys.A,1);
 dim.ny=size(sys.C,1);
 dim.nu=size(sys.B,2);
+dim.nd=1;
 
 %% Disturbance Dynamics
-dsys.A = eye(dim.ny);
-dsys.B = zeros(dim.nx, dim.ny);
-dsys.C = eye(dim.ny);
+dsys.A = eye(dim.nd);
+dsys.B = zeros(dim.nx, dim.nd);
+dsys.C = [0; 3; 1];
 
 %% Save as .mat
 

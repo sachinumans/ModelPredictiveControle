@@ -2,7 +2,7 @@ function [u] = MPCgetInput(T, S, cstr, R_scld, Q_scld, P, dim, xRef, uRef, x0, s
 % This is the place where the current state is used to perform the constrained MPC optimisation
 
 [H,h]=costgen(T, S, R_scld, Q_scld, P, dim, x0-xRef); 
-
+display(x0)
 uN = sdpvar(dim.nu*dim.N,1);
 
 states = (T*x0 + S*uN);

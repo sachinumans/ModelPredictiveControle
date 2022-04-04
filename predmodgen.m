@@ -1,4 +1,4 @@
-function [T,S]=predmodgen(sys,dim,x0)
+function [T,S]=predmodgen(sys,dim)
 
 %Prediction matrices generation
 %This function computes the prediction matrices to be used in the
