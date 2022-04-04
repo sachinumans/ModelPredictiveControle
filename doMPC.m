@@ -14,7 +14,7 @@ if any(cstr.X_cstr1*x0 >= cstr.X_cstr_b1)
     error("Initial state is outside of state set")
 end
 
-yRef = 0.1;
+yRef = 0.3;
 [xRef,uRef] = getRef(yRef, sys, cstr)
 uRefN = repmat(uRef, dim.N, 1);
 
@@ -29,6 +29,18 @@ for t = 2:n
     [T,S] = predmodgen(sys,dim,x(:,t));
     u(:,t) = MPCgetInput(T, S, cstr, R_scld, Q_scld, P, dim, xRef,uRefN, x(:,t), sys, t);
 end
+subplot(2,2,1)
+title("$\dot{z}$", 'Interpreter', 'latex')
+hold on
+
+hold off
+subplot(2,2,2)
+title("$\dot{\theta}$", 'Interpreter', 'latex')
+subplot(2,2,3)
+title("$\theta$", 'Interpreter', 'latex')
+subplot(2,2,4)
+title("z", 'Interpreter', 'latex')
+hold off
 
 %%
 figure('Name', "Evolution", 'windowState', 'maximized')
