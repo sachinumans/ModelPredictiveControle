@@ -14,7 +14,7 @@ if any(cstr.X_cstr1*x0 >= cstr.X_cstr_b1)
     error("Initial state is outside of state set")
 end
 
-yRef = 0.3;
+yRef = [2; 0];
 [xRef,uRef] = getRef(yRef, sys, cstr)
 uRefN = repmat(uRef, dim.N, 1);
 
