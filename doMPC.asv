@@ -6,12 +6,12 @@ load System.mat
 load cstrMat.mat
 load CostMat.mat
 
-n = 40; 
-yRef = [2; 0]; %z, theta
+n = 20; 
+yRef = [0; 0]; %z, theta
 
-x0 = [3;0.5;1;-1];
+x0 = [3;0;1;-1];
 x0hat = [0;0;0;0];
-d = 1;
+d = 0;
 d0hat = 0;
 
 [T,S] = predmodgen(sys,dim);
@@ -82,13 +82,13 @@ title("Inputs")
 legend("$\delta_s$", "$\delta_b$", 'Interpreter', 'latex')
 
 %% Plot estimates versus real states
-StateNames = ["$\dot{z}$", "$\dot{\theta}$", "$\theta$", "z", "$d_1 $"];
+StateNames = ["$\dot{z}$", "$\dot{\theta}$", "$\theta$", "z", "$d_1 error$"];
 figure('Name', "Estimates", 'windowState', 'maximized')
 for idx = 1:5
     subplot(3,2,idx); hold on
     plot(0:sys.Ts:sys.Ts*(n-1), x(idx, :))
     plot(0:sys.Ts:sys.Ts*(n-1), xhat(idx, :), 'r--')
-    legend(StateNames(idx), strjoin([StateNames(idx) " Estimate"]), 'Interpreter', 'latex')
+    legend(StateNames(idx), strjoin([StateNames(idx) " estimate"]), 'Interpreter', 'latex')
     title(StateNames(idx), 'Interpreter', 'latex');
 end
 

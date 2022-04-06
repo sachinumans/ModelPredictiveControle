@@ -1,8 +1,8 @@
-function [u] = MPCgetInput(T, S, cstr, R_scld, Q_scld, P, dim, xRef, uRef, x0, sys, t)
+function [u] = MPCgetInput(T, S, cstr, R_scld, Q_scld, P, dim, xRef, uRef, x0, sys, t, Pl)
 % This is the place where the current state is used to perform the constrained MPC optimisation
 
 [H,h]=costgen(T, S, R_scld, Q_scld, P, dim, x0-xRef); 
-display(x0)
+% display(x0)
 uN = sdpvar(dim.nu*dim.N,1);
 
 states = (T*x0 + S*uN);
@@ -13,12 +13,13 @@ Constraints = [cstr.X_cstr*states                                           <= c
                cstr.Xf_cstr*(states(end-2*dim.nx+1:end-dim.nx)-xRef)        <= cstr.Xf_cstr_b... % Original cstr.Xf_cstr*(states(end-2*dim.nx:end-dim.nx-1)-xRef)        <= cstr.Xf_cstr_b...
                ];
 
-optimize(Constraints, Objective);
+f = optimize(Constraints, Objective);
 
 u = value(uN(1:dim.nu));
 
 proj_states = reshape(value(states), 4, dim.N+1);
 
+if Pl == "Y"
 % plot(sys.Ts*(t:t+dim.N), reshape(value(states), 4, dim.N+1), 'Color', [1/t^(1/4) 1-1/t^(1/4) 1/t^(1/4) 0.15])
 subplot(2,2,1)
 hold on
@@ -40,5 +41,6 @@ hold on
 plot(sys.Ts*(t:t+dim.N), proj_states(4,:), 'Color', [1/t^(1/4) 1-1/t^(1/4) 1/t^(1/4) 0.2])
 plot(sys.Ts*(t:t+dim.N), xRef(4)*ones(dim.N+1,1), 'Color', 'b')
 hold off
+end
 end
 
