@@ -6,12 +6,12 @@ load System.mat
 load cstrMat.mat
 load CostMat.mat
 
-n = 50; 
-yRef = [2; 0]; %z, theta
+n = 40; 
+yRef = [0; 0]; %z, theta
 
-x0 = [0;0;2;-0.5];
-x0hat = [0;0;0;0];
-d = 1;
+x0 = [0;0;-1;-0.9];
+x0hat = x0; %[0;0;0;0];
+d = 0;
 d0hat = 0;
 
 [T,S] = predmodgen(sys,dim);
@@ -39,15 +39,13 @@ uRefN = repmat(uRef(:,1), dim.N, 1);
 if n < dim.N; error("Simulation time too short"); end
 
 %% Online
-u(:,1) = MPCgetInput(T, S, cstr, R_scld, Q_scld, P, dim, xRef(:,1),uRefN, x0hat, sys, 1);
+u(:,1) = MPCgetInput(T, S, cstr, R_scld, Q_scld, P, dim, xRef(:,1),uRefN, x0hat, sys, 1, "Y");
 for t = 2:n
     t
     x(:,t) = [sys.A, dsys.B; zeros(dim.nd, dim.nx), dsys.A]*x(:, t-1) + [sys.B; zeros(dim.nd, dim.nu)]*u(:, t-1);
     [xhat(:,t), xRef(:,t), uRef(:,t)] = Observer(L, xhat(:,t-1), x(:,t-1), u(:,t-1), yRef, sys, dsys, cstr, dim);
-%     xhat(end,t) = 0;
     uRefN = repmat(uRef(:,t), dim.N, 1);
-%     [T,S] = predmodgen(sys,dim);
-    u(:,t) = MPCgetInput(T, S, cstr, R_scld, Q_scld, P, dim, xRef(:,t),uRefN, xhat(1:dim.nx,t), sys, t);
+    u(:,t) = MPCgetInput(T, S, cstr, R_scld, Q_scld, P, dim, xRef(:,t),uRefN, xhat(1:dim.nx,t), sys, t, "Y");
 end
 
 %% Plotting

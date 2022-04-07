@@ -32,7 +32,7 @@ DTsys = c2d(CTsys, t_sample);
 sys = DTsys;
 
 %% Dimensions and horizon
-dim.N=50;
+dim.N=40;
 
 dim.nx=size(sys.A,1);
 dim.ny=size(sys.C,1);
