@@ -57,7 +57,7 @@ text(5,-1,"$\mathcal{X}$", 'Interpreter', 'latex')
 text(-0.2,0.05,"$\mathcal{X}_f$", 'Interpreter', 'latex')
 text(-0.5,-0.25,"$\mathcal{X}_0$", 'Interpreter', 'latex')
 for idx = 1:16
-    plot(X_0(3, :, idx), X_0(2, :, idx), 'Color', [idx/16 idx/16 1-idx/16 0.5])
+    plot(X_0(3, :, idx), X_0(2, :, idx), 'Color', [0 idx/16 1-idx/16 0.5])
 end
 hold off
 
@@ -73,7 +73,7 @@ text(5,-1,"$\mathcal{X}$", 'Interpreter', 'latex')
 text(-0.2,0.05,"$\mathcal{X}_f$", 'Interpreter', 'latex')
 text(-0.5,-0.25,"$\mathcal{X}_0$", 'Interpreter', 'latex')
 for idx = 1:16
-    plot(X_0(4, :, idx), X_0(1, :, idx), 'Color', [idx/16 idx/16 1-idx/16 0.5])
+    plot(X_0(4, :, idx), X_0(1, :, idx), 'Color', [0 idx/16 1-idx/16 0.5])
 end
 hold off
 
