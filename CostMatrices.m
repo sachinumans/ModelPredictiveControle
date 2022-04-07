@@ -2,7 +2,7 @@ clear
 load System.mat
 
 N = diag([2.5, 20, 4, 0.1]);
-Q = diag([1, 1, 1000, 1000]);
+Q = diag([1, 1, 10, 10]);
 Q_scld = N.'*Q*N;
 
 R = diag([2, 1]);
