@@ -1,4 +1,8 @@
 function [term_set, sqrtc, V_scld] = TerminalSet(K, P, cstr)
+%%%%%%%%%%%%%%%%%%
+% Used to determine the terminal set
+%%%%%%%%%%%%%%%%%%
+
 [V, D] = eig(P);
 
 norm1 = norm(V(:,1));

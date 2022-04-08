@@ -34,7 +34,7 @@ xhat = [[x0hat; d0hat], zeros(dim.nx+dim.nd,n-1)];
 u = zeros(dim.nu, n); 
 
 [xRef(:,1),uRef(:,1)] = getRef(yRef, x(dim.nx+1:end,1), sys, dsys, cstr, dim); % Reference signals excluding d
-uRefN = repmat(uRef(:,1), dim.N, 1);
+uRefN = repmat(uRef(:,1), dim.N, 1); % uRef repeated N times
 
 if n < dim.N; error("Simulation time too short"); end
 
@@ -42,9 +42,9 @@ if n < dim.N; error("Simulation time too short"); end
 u(:,1) = MPCgetInput(T, S, cstr, R_scld, Q_scld, P, dim, xRef(:,1),uRefN, x0hat, sys, 1, "Y");
 for t = 2:n
     t
-    x(:,t) = [sys.A, dsys.B; zeros(dim.nd, dim.nx), dsys.A]*x(:, t-1) + [sys.B; zeros(dim.nd, dim.nu)]*u(:, t-1);
-    [xhat(:,t), xRef(:,t), uRef(:,t)] = Observer(L, xhat(:,t-1), x(:,t-1), u(:,t-1), yRef, sys, dsys, cstr, dim);
-    uRefN = repmat(uRef(:,t), dim.N, 1);
+    x(:,t) = [sys.A, dsys.B; zeros(dim.nd, dim.nx), dsys.A]*x(:, t-1) + [sys.B; zeros(dim.nd, dim.nu)]*u(:, t-1); %update state
+    [xhat(:,t), xRef(:,t), uRef(:,t)] = Observer(L, xhat(:,t-1), x(:,t-1), u(:,t-1), yRef, sys, dsys, cstr, dim); %update state estimate
+    uRefN = repmat(uRef(:,t), dim.N, 1); % uRef repeated N times
     u(:,t) = MPCgetInput(T, S, cstr, R_scld, Q_scld, P, dim, xRef(:,t),uRefN, xhat(1:dim.nx,t), sys, t, "Y");
 end
 
@@ -90,6 +90,7 @@ for idx = 1:5
     title(StateNames(idx), 'Interpreter', 'latex');
 end
 
+%% Unnecessary code to store specific state trajectories
 load horComp
 xHor(:,:,3) = x(1:4,:)';
 save horComp xHor

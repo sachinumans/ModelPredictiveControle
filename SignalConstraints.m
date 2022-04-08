@@ -1,3 +1,7 @@
+%%%%%%%%%%%%%%%%%%%
+% Plot all of the state and input sets
+%%%%%%%%%%%%%%%%%%%
+
 clear; clc; close all;
 
 %% Input set

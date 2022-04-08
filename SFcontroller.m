@@ -8,9 +8,8 @@ load CostMat
 
 %% Define SF system
 Ksf = place(sys.A, sys.B, [0.3, 0.4, 0.5, 0.6]);
-% g = dcgain(sys);
-% FFsf = ((eye(dim.nx) - sys.A + sys.B*Ksf));%[1./g(1,:); g(1,:); g(1,:); 1./g(1,:) ];
-% FFlqr = ((eye(dim.nx) - sys.A - sys.B*K));%[1./g(1,:); g(1,:); g(1,:); 1./g(1,:) ]; 
+
+%% Simulate controllers
 for w = 1:2
     x0 = vertX0(randi(size(vertX0,1)), :)';
     yref = rand(2,1)*2-1.*[1;2];

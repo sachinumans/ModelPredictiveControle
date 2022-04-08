@@ -1,3 +1,6 @@
+%%%%%%%%%%%%%%
+% Define all system parameters
+%%%%%%%%%%%%%%
 clear all;
 % Inertias
 I_yy  = 4370*10^7;

@@ -10,13 +10,6 @@ maxIter = 20; Iter=0;
 Err = 1e-2;
 maxFound = false; lastFailed = true;
 db = -1; %debug var
-%% Get hyperprism vertices multiplier 
-% v = [ones(1, 4), -1*ones(1, 4)];
-% C = unique(nchoosek(v,4), 'rows');
-% for idx = 1:size(C, 1)
-%     C = [C; unique(perms(C(idx,:)), 'rows')];
-% end
-% C = unique(C, 'rows');
 
 %% Perform bisection optimisation
 for idx = 1:size(cstr.verts_f, 2)
@@ -41,12 +34,12 @@ for idx = 1:size(cstr.verts_f, 2)
     end
 end
 
-vertX0 = k(:, 1).*dir';
-kFin = k(:, 1);
+vertX0 = k(:, 1).*dir'; % Set vertices to lower bounds
+kFin = k(:, 1); % Determine final gains
 
 %%
 X_0 = zeros(dim.nx+dim.nd, dim.N, dim.nx^2); % reset vertices evolutions
-parfor a = 1:dim.nx^2
+parfor a = 1:dim.nx^2 % Simulate all vertices as x0
     X_0(:,:,a) = funcDoMPC(vertX0(a, :)', dim.N, [0;0]);
 end
 

@@ -1,13 +1,10 @@
+%%%%%%%%%%%%%%%%%%%%%%
+% General sandbox for system analysis
+%%%%%%%%%%%%%%%%%%%%%%
 clear; clc; close all;
 updateAll("Y")
 load System.mat
 load cstrMat
-
-%% Nyquist
-% L = series(eye(2), sys);
-% nq = eye(2) + L;
-% detnq = nq(1,1)*nq(2,2) - nq(2,1)*nq(1,2);
-% nyquistplot(-1*detnq)
 
 %% Pole zero
 figure()

@@ -1,3 +1,6 @@
+%%%%%%%%%%%%%%%%
+% Determine constraint matrices
+%%%%%%%%%%%%%%%%
 load CostMat
 
 % u = [del_s; del_b]

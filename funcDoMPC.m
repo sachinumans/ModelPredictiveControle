@@ -1,12 +1,14 @@
 function [x] = funcDoMPC(x0, n, yRef)
+%%%%%%%%%%%%%%%%
+% This is just a callable version of doMPC.m
+%%%%%%%%%%%%%%%%
+
 %% Offline
 load System.mat
 load cstrMat.mat
 load CostMat.mat
 
-% yRef = [0; 0]; %z, theta
-
-x0hat = x0;%[0;0;0;0];
+x0hat = x0;
 d = 0;
 d0hat = 0;
 
@@ -29,8 +31,6 @@ u = zeros(dim.nu, n);
 
 [xRef(:,1),uRef(:,1)] = getRef(yRef, x(dim.nx+1:end,1), sys, dsys, cstr, dim); % Reference signals excluding d
 uRefN = repmat(uRef(:,1), dim.N, 1);
-
-% if n < dim.N; error("Simulation time too short"); end
 
 %% Online
 u(:,1) = MPCgetInput(T, S, cstr, R_scld, Q_scld, P, dim, xRef(:,1),uRefN, x0hat, sys, 1, "N");

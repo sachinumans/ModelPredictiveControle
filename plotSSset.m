@@ -1,6 +1,11 @@
+%%%%%%%%%%%%%%%%%
+% Plot the steady state solutions
+%%%%%%%%%%%%%%%%%
 clear; close all; clc;
 load System.mat
 load cstrMat.mat
+
+%% Define grid
 n = 50;
 
 idx1 = 1; idx2 = 1;
@@ -8,7 +13,7 @@ X = linspace(-8, 8, n);
 Y = linspace(-3, 3, n);
 Z = zeros(n,n,4);
 
-
+%% Loop through grid
 for z=X
     idx2=1;
     for theta=Y
@@ -33,7 +38,7 @@ for z=X
     idx1 = idx1 +1;
 end
 save SSset.mat X Y Z
-%%
+%% Plot
 
 Z(Z==0) = NaN;
 

@@ -9,10 +9,10 @@ N = [2.5, 20, 4, 0.1]; % State normalising vector
 Nu = [4, 4]; % Input normalising vector
 
 Objective = norm(N*xref + Nu*uref, 1);
-Constraints = [ (eye(size(sys.A))-sys.A)*xref - sys.B*uref == dsys.B*dhat ,...
-                sys.C(1:2, :)*xref == yRef - dsys.C(1:2, :)*dhat ,...
-                cstr.X_cstr1 * xref <= cstr.X_cstr_b1 ,...
-                cstr.U_cstr1 * uref <= cstr.U_cstr_b1 ...
+Constraints = [ (eye(size(sys.A))-sys.A)*xref - sys.B*uref == dsys.B*dhat ,... Steady state
+                sys.C(1:2, :)*xref == yRef - dsys.C(1:2, :)*dhat ,... Correct output
+                cstr.X_cstr1 * xref <= cstr.X_cstr_b1 ,... Within state set
+                cstr.U_cstr1 * uref <= cstr.U_cstr_b1 ... Within input set
                 ];
             
 f = optimize(Constraints, Objective);

@@ -1,3 +1,7 @@
+%%%%%%%%%%%%%%%%
+% Discretise the system, define dimensions and define disturbances
+%%%%%%%%%%%%%%%%
+
 load param
 
 t_sample = 1;

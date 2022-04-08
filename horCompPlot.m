@@ -1,3 +1,4 @@
+% Plot the comparison of different length horizons
 load horComp
 n=60;
 StateNames = ["$\dot{z}$", "$\dot{\theta}$", "$\theta$", "z", "$d$"];
