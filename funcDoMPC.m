@@ -1,12 +1,12 @@
-function [x] = funcDoMPC(x0, n)
+function [x] = funcDoMPC(x0, n, yRef)
 %% Offline
 load System.mat
 load cstrMat.mat
 load CostMat.mat
 
-yRef = [0; 0]; %z, theta
+% yRef = [0; 0]; %z, theta
 
-x0hat = [0;0;0;0];
+x0hat = x0;%[0;0;0;0];
 d = 0;
 d0hat = 0;
 
