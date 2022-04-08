@@ -52,6 +52,19 @@ vertsT = vertsT(:, shuf);
 
 bT = boundary(vertsT(2,:)', vertsT(1,:)', 0);
 
+%% determine Initial set
+load X_0
+
+% Depth
+vertsZ0 = vertX0(:, [1 4]);
+ 
+bZ0 = boundary(vertsZ0(:,2), vertsZ0(:,1), 0);
+
+% Pitch
+vertsT0 = vertX0(:, [2 3]);
+
+bT0 = boundary(vertsT0(:,2), vertsT0(:,1), 0);
+
 
 
 
@@ -64,26 +77,26 @@ subplot(2, 1, 1)
 hold on
 grid on
 patch([ang, 0, -ang, -ang, 0, ang], [1, 3, 1, -1, -3, -1], 'red', 'FaceAlpha', 0.2)
-patch([-1,1,1,-1].*vertX0(3), [-1,-1,1,1].*vertX0(2), 'magenta', 'FaceAlpha', 0.2) % [-0.5;-0.5;-1;-0.9]
+patch(vertsT0(bT0,2), vertsT0(bT0,1), 'magenta', 'FaceAlpha', 0.2) % [-0.5;-0.5;-1;-0.9]
 patch(vertsT(2, bT), vertsT(1,bT), 'blue', 'FaceAlpha', 0.5)
 xlabel("\theta")
 ylabel("$\dot{\theta}$", 'Interpreter', 'latex')
-text(5,-1,"$\mathcal{X}$", 'Interpreter', 'latex')
+text(0,-2,"$\mathcal{X}$", 'Interpreter', 'latex')
 text(-0.2,0.05,"$\mathcal{X}_f$", 'Interpreter', 'latex')
-text(-0.5,-0.25,"$\mathcal{X}_0$", 'Interpreter', 'latex')
+text(-10,0,"$\mathcal{X}_0$", 'Interpreter', 'latex')
 hold off
 
 subplot(2, 1, 2)
 hold on
 grid on
 patch([-10, 10, 10, -10], [-10, -10, 10, 10], 'red', 'FaceAlpha', 0.2)
-patch([-1,1,1,-1].*vertX0(4), [-1,-1,1,1].*vertX0(1), 'magenta', 'FaceAlpha', 0.2) % +-[0.5;0.5;1;0.9]
+patch(vertsZ0(bZ0,2), vertsZ0(bZ0,1), 'magenta', 'FaceAlpha', 0.2) % +-[0.5;0.5;1;0.9]
 patch(vertsZ(2, bZ), vertsZ(1,bZ), 'blue', 'FaceAlpha', 0.5)
 xlabel("z")
 ylabel("$\dot{z}$", 'Interpreter', 'latex')
 text(5,-1,"$\mathcal{X}$", 'Interpreter', 'latex')
 text(-0.2,0.05,"$\mathcal{X}_f$", 'Interpreter', 'latex')
-text(-0.5,-0.25,"$\mathcal{X}_0$", 'Interpreter', 'latex')
+text(2,0,"$\mathcal{X}_0$", 'Interpreter', 'latex')
 
 %% Reachability
 load X_0
@@ -93,31 +106,31 @@ subplot(2, 1, 1)
 hold on
 grid on
 patch([ang, 0, -ang, -ang, 0, ang], [1, 3, 1, -1, -3, -1], 'red', 'FaceAlpha', 0.2)
-patch([-1,1,1,-1].*vertX0(3), [-1,-1,1,1].*vertX0(2), 'magenta', 'FaceAlpha', 0.2) % [-0.5;-0.5;-1;-0.9]
+patch(vertsT0(bT0,2), vertsT0(bT0,1), 'magenta', 'FaceAlpha', 0.2) % [-0.5;-0.5;-1;-0.9]
 patch(vertsT(2, bT), vertsT(1,bT), 'blue', 'FaceAlpha', 0.5)
 xlabel("\theta")
 ylabel("$\dot{\theta}$", 'Interpreter', 'latex')
-text(5,-1,"$\mathcal{X}$", 'Interpreter', 'latex')
-text(-0.2,0.05,"$\mathcal{X}_f$", 'Interpreter', 'latex')
-text(-0.5,-0.25,"$\mathcal{X}_0$", 'Interpreter', 'latex')
 for idx = 1:16
     plot(X_0(3, :, idx), X_0(2, :, idx), 'Color', [0 idx/16 1-idx/16 0.5])
 end
+text(0,-2,"$\mathcal{X}$", 'Interpreter', 'latex')
+text(-0.2,0.05,"$\mathcal{X}_f$", 'Interpreter', 'latex')
+text(5,0,"$\mathcal{X}_0$", 'Interpreter', 'latex')
 hold off
 
 subplot(2, 1, 2)
 hold on
 grid on
 patch([-10, 10, 10, -10], [-10, -10, 10, 10], 'red', 'FaceAlpha', 0.2)
-patch([-1,1,1,-1].*vertX0(4), [-1,-1,1,1].*vertX0(1), 'magenta', 'FaceAlpha', 0.2) % +-[0.5;0.5;1;0.9]
+patch(vertsZ0(bZ0,2), vertsZ0(bZ0,1), 'magenta', 'FaceAlpha', 0.2) % +-[0.5;0.5;1;0.9]
 patch(vertsZ(2, bZ), vertsZ(1,bZ), 'blue', 'FaceAlpha', 0.5)
 xlabel("z")
 ylabel("$\dot{z}$", 'Interpreter', 'latex')
-text(5,-1,"$\mathcal{X}$", 'Interpreter', 'latex')
-text(-0.2,0.05,"$\mathcal{X}_f$", 'Interpreter', 'latex')
-text(-0.5,-0.25,"$\mathcal{X}_0$", 'Interpreter', 'latex')
 for idx = 1:16
     plot(X_0(4, :, idx), X_0(1, :, idx), 'Color', [0 idx/16 1-idx/16 0.5])
 end
+text(5,-1,"$\mathcal{X}$", 'Interpreter', 'latex')
+text(-0.2,0.05,"$\mathcal{X}_f$", 'Interpreter', 'latex')
+text(2,0,"$\mathcal{X}_0$", 'Interpreter', 'latex')
 hold off
 

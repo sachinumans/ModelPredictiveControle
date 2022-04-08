@@ -9,8 +9,8 @@ load CostMat.mat
 n = 40; 
 yRef = [0; 0]; %z, theta
 
-x0 = [-0.3546;0.3173;-4.0605;-1.0021]*-3.2;
-x0hat = x0; %[0;0;0;0];
+x0 = [-0.3546;0.3173;-4.0605;-1.0021]*-2;
+x0hat = x0;%[0;0;0;0];
 d = 0;
 d0hat = 0;
 
@@ -90,17 +90,7 @@ for idx = 1:5
     title(StateNames(idx), 'Interpreter', 'latex');
 end
 
-% subplot(3,2,5); hold on
-% yline(d(1, :));
-% % plot(0:sys.Ts:sys.Ts*(n-1), d(1, :))
-% plot(0:sys.Ts:sys.Ts*(n-1), dhat(1, :), 'r--')
-% legend("d_1", "d_1 Estimate", 'Interpreter', 'latex')
-% title("d_1", 'Interpreter', 'latex');
-% 
-% subplot(3,2,6); hold on
-% yline(d(2, :));
-% % plot(0:sys.Ts:sys.Ts*(n-1), d(2, :))
-% plot(0:sys.Ts:sys.Ts*(n-1), dhat(2, :), 'r--')
-% legend("d_2", "d_2 Estimate", 'Interpreter', 'latex')
-% title("d_2", 'Interpreter', 'latex');
+load horComp
+xHor(:,:,3) = x(1:4,:)';
+save horComp xHor
 
