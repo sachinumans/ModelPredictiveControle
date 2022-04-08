@@ -1,4 +1,4 @@
-function [term_set, c, V_scld] = TerminalSet(K, P, cstr)
+function [term_set, sqrtc, V_scld] = TerminalSet(K, P, cstr)
 [V, D] = eig(P);
 
 norm1 = norm(V(:,1));
@@ -15,7 +15,7 @@ scl2 = sqrt(cost1/cost2);
 scl3 = sqrt(cost1/cost3);
 scl4 = sqrt(cost1/cost4);
 
-V_scld = [V(:,1), scl2*V(:,2), scl3*V(:,3), scl4*V(:,4)]
+V_scld = [V(:,1), scl2*V(:,2), scl3*V(:,3), scl4*V(:,4)];
 
 % V = eye(4)
 Xs = [];
@@ -37,8 +37,10 @@ b_opt = [b_opt;  b_opt];
 
 A_opt = [A_opt; reshape(cstr.X_cstr1*Xs, [10*16, 1])];
 b_opt = [b_opt; repmat(cstr.X_cstr_b1, 16,1)];
-c = linprog(-1, A_opt, b_opt)
+sqrtc = linprog(-1, A_opt, b_opt);
 
-term_set = c*Xs;
+term_set = sqrtc*Xs;
+
+c = sqrtc^2
 
 end
