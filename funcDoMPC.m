@@ -30,7 +30,7 @@ u = zeros(dim.nu, n);
 [xRef(:,1),uRef(:,1)] = getRef(yRef, x(dim.nx+1:end,1), sys, dsys, cstr, dim); % Reference signals excluding d
 uRefN = repmat(uRef(:,1), dim.N, 1);
 
-if n < dim.N; error("Simulation time too short"); end
+% if n < dim.N; error("Simulation time too short"); end
 
 %% Online
 u(:,1) = MPCgetInput(T, S, cstr, R_scld, Q_scld, P, dim, xRef(:,1),uRefN, x0hat, sys, 1, "N");

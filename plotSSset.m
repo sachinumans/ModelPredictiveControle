@@ -1,11 +1,11 @@
 clear; close all; clc;
 load System.mat
 load cstrMat.mat
-n = 20;
+n = 50;
 
 idx1 = 1; idx2 = 1;
 X = linspace(-8, 8, n);
-Y = linspace(-7, 7, n);
+Y = linspace(-3, 3, n);
 Z = zeros(n,n,4);
 
 
@@ -32,7 +32,10 @@ for z=X
     end
     idx1 = idx1 +1;
 end
+save SSset.mat X Y Z
 %%
+
+Z(Z==0) = NaN;
 
 figure('Name', "Steady state solutions", "WindowState", "maximized")
 subplot(2,2,1)
